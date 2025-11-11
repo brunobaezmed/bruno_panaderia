@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 11-11-2025 a las 23:11:26
+-- Tiempo de generación: 12-11-2025 a las 00:12:45
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -33,16 +33,17 @@ CREATE TABLE `ajustes_stock` (
   `fecha_ajuste` date NOT NULL,
   `tipo_ajuste` enum('Aumento','Disminución') NOT NULL,
   `motivo` varchar(200) DEFAULT NULL,
-  `responsable` varchar(100) DEFAULT NULL
+  `responsable` varchar(100) DEFAULT NULL,
+  `estado` varchar(10) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Volcado de datos para la tabla `ajustes_stock`
 --
 
-INSERT INTO `ajustes_stock` (`id_ajuste`, `id_deposito`, `fecha_ajuste`, `tipo_ajuste`, `motivo`, `responsable`) VALUES
-(1, 1, '2025-11-02', 'Disminución', 'Productos vencidos', 'Supervisor Juan Pérez'),
-(2, 2, '2025-11-02', 'Aumento', 'Inventario real mayor que el registrado', 'Encargada Ana Gómez');
+INSERT INTO `ajustes_stock` (`id_ajuste`, `id_deposito`, `fecha_ajuste`, `tipo_ajuste`, `motivo`, `responsable`, `estado`) VALUES
+(1, 1, '2025-11-02', 'Disminución', 'Productos vencidos', 'Supervisor Juan Pérez', ''),
+(2, 2, '2025-11-02', 'Aumento', 'Inventario real mayor que el registrado', 'Encargada Ana Gómez', '');
 
 -- --------------------------------------------------------
 
@@ -55,16 +56,9 @@ CREATE TABLE `clientes` (
   `nombre_cliente` varchar(100) NOT NULL,
   `telefono` varchar(20) DEFAULT NULL,
   `direccion` varchar(150) DEFAULT NULL,
-  `email` varchar(100) DEFAULT NULL
+  `email` varchar(100) DEFAULT NULL,
+  `estado` varchar(10) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Volcado de datos para la tabla `clientes`
---
-
-INSERT INTO `clientes` (`id_cliente`, `nombre_cliente`, `telefono`, `direccion`, `email`) VALUES
-(1, 'Carlos López', '0982-111222', 'Av. Libertad 123', 'carlos.lopez@email.com'),
-(2, 'Ana Gómez', '0971-333444', 'Calle Palma 456', 'ana.gomez@email.com');
 
 -- --------------------------------------------------------
 
@@ -74,17 +68,10 @@ INSERT INTO `clientes` (`id_cliente`, `nombre_cliente`, `telefono`, `direccion`,
 
 CREATE TABLE `depositos` (
   `id_deposito` int(11) NOT NULL,
-  `nombre_deposito` varchar(100) NOT NULL,
-  `ubicacion` varchar(150) DEFAULT NULL
+  `nombre_deposito` varchar(50) NOT NULL,
+  `ubicacion` varchar(150) DEFAULT NULL,
+  `estado` varchar(10) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Volcado de datos para la tabla `depositos`
---
-
-INSERT INTO `depositos` (`id_deposito`, `nombre_deposito`, `ubicacion`) VALUES
-(1, 'Depósito Central', 'Av. Industrial 1000'),
-(2, 'Depósito Sucursal 1', 'Calle Principal 50');
 
 -- --------------------------------------------------------
 
@@ -370,16 +357,17 @@ CREATE TABLE `egresos_ventas` (
   `id_egreso` int(11) NOT NULL,
   `id_cliente` int(11) NOT NULL,
   `fecha_venta` date NOT NULL,
-  `total_venta` decimal(10,2) DEFAULT 0.00,
-  `observacion` varchar(200) DEFAULT NULL
+  `total_venta` int(11) DEFAULT 0,
+  `observacion` varchar(200) DEFAULT NULL,
+  `estado` varchar(10) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Volcado de datos para la tabla `egresos_ventas`
 --
 
-INSERT INTO `egresos_ventas` (`id_egreso`, `id_cliente`, `fecha_venta`, `total_venta`, `observacion`) VALUES
-(1, 1, '2025-11-02', 0.00, 'Venta de productos para cafetería local');
+INSERT INTO `egresos_ventas` (`id_egreso`, `id_cliente`, `fecha_venta`, `total_venta`, `observacion`, `estado`) VALUES
+(1, 1, '2025-11-02', 0, 'Venta de productos para cafetería local', '');
 
 -- --------------------------------------------------------
 
@@ -391,16 +379,17 @@ CREATE TABLE `ingresos_compras` (
   `id_ingreso` int(11) NOT NULL,
   `id_proveedor` int(11) NOT NULL,
   `fecha_ingreso` date NOT NULL,
-  `total_compra` decimal(10,2) DEFAULT 0.00,
-  `observacion` varchar(200) DEFAULT NULL
+  `total_compra` int(11) DEFAULT 0,
+  `observacion` varchar(200) DEFAULT NULL,
+  `estado` varchar(10) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Volcado de datos para la tabla `ingresos_compras`
 --
 
-INSERT INTO `ingresos_compras` (`id_ingreso`, `id_proveedor`, `fecha_ingreso`, `total_compra`, `observacion`) VALUES
-(1, 1, '2025-11-02', 0.00, 'Compra semanal de insumos básicos');
+INSERT INTO `ingresos_compras` (`id_ingreso`, `id_proveedor`, `fecha_ingreso`, `total_compra`, `observacion`, `estado`) VALUES
+(1, 1, '2025-11-02', 0, 'Compra semanal de insumos básicos', '');
 
 -- --------------------------------------------------------
 
@@ -416,7 +405,8 @@ CREATE TABLE `libro_movimientos` (
   `id_deposito` int(11) DEFAULT NULL,
   `cantidad` int(11) NOT NULL,
   `referencia` varchar(100) DEFAULT NULL,
-  `observacion` varchar(200) DEFAULT NULL
+  `observacion` varchar(200) DEFAULT NULL,
+  `estado` varchar(10) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -432,8 +422,8 @@ CREATE TABLE `productos` (
   `unidad_medida` varchar(20) DEFAULT NULL,
   `stock_actual` int(11) DEFAULT 0,
   `stock_minimo` int(11) DEFAULT 10,
-  `precio_unitario` decimal(10,2) NOT NULL,
-  `estado` enum('Activo','Inactivo') DEFAULT 'Activo'
+  `precio_unitario` int(10) NOT NULL,
+  `estado` varchar(10) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -441,9 +431,9 @@ CREATE TABLE `productos` (
 --
 
 INSERT INTO `productos` (`id_producto`, `nombre_producto`, `descripcion`, `unidad_medida`, `stock_actual`, `stock_minimo`, `precio_unitario`, `estado`) VALUES
-(1, 'Harina 000', 'Harina blanca para pan', 'kg', 140, 10, 5000.00, 'Activo'),
-(2, 'Levadura seca', 'Levadura en polvo 100g', 'paquete', 65, 10, 8000.00, 'Activo'),
-(3, 'Azúcar', 'Azúcar refinada', 'kg', 102, 10, 4500.00, 'Activo');
+(1, 'Harina 000', 'Harina blanca para pan', 'kg', 140, 10, 5000, 'Activo'),
+(2, 'Levadura seca', 'Levadura en polvo 100g', 'paquete', 65, 10, 8000, 'Activo'),
+(3, 'Azúcar', 'Azúcar refinada', 'kg', 102, 10, 4500, 'Activo');
 
 -- --------------------------------------------------------
 
@@ -453,19 +443,22 @@ INSERT INTO `productos` (`id_producto`, `nombre_producto`, `descripcion`, `unida
 
 CREATE TABLE `proveedores` (
   `id_proveedor` int(11) NOT NULL,
-  `nombre_proveedor` varchar(100) NOT NULL,
+  `nombre_apellido` varchar(80) NOT NULL,
   `telefono` varchar(20) DEFAULT NULL,
   `direccion` varchar(150) DEFAULT NULL,
-  `email` varchar(100) DEFAULT NULL
+  `email` varchar(100) DEFAULT NULL,
+  `estado` varchar(10) DEFAULT NULL,
+  `ruc` varchar(20) NOT NULL,
+  `razon_social` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Volcado de datos para la tabla `proveedores`
 --
 
-INSERT INTO `proveedores` (`id_proveedor`, `nombre_proveedor`, `telefono`, `direccion`, `email`) VALUES
-(1, 'Molinos San Juan', '0981-123456', 'Av. Central 456', 'contacto@molinos.com'),
-(2, 'Pan Ingredientes SRL', '0972-654321', 'Calle Flores 120', 'ventas@paningred.com');
+INSERT INTO `proveedores` (`id_proveedor`, `nombre_apellido`, `telefono`, `direccion`, `email`, `estado`, `ruc`, `razon_social`) VALUES
+(1, 'Molinos San Juan', '0981-123456', 'Av. Central 456', 'contacto@molinos.com', NULL, '', ''),
+(2, 'Pan Ingredientes SRL', '0972-654321', 'Calle Flores 120', 'ventas@paningred.com', NULL, '', '');
 
 -- --------------------------------------------------------
 
