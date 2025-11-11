@@ -345,6 +345,7 @@
 
 
     <script src="vista/util.js"></script>
+  <script src="vista/deposito.js"></script>
     <script src="vista/alumnos.js"></script>
     <script src="vista/informes.js"></script>
     <script src="vista/bachilleratos.js"></script>
