@@ -1,6 +1,7 @@
 function mostrarListaDeposito() {
     let contenido = dameContenido("paginas/referenciales/deposito/listar.php");
     $(".contenido-principal").html(contenido);
+    console(contenido);
     cargarTablaDeposito();
 }
 

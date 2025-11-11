@@ -346,25 +346,7 @@
 
     <script src="vista/util.js"></script>
   <script src="vista/deposito.js"></script>
-    <script src="vista/alumnos.js"></script>
-    <script src="vista/informes.js"></script>
-    <script src="vista/bachilleratos.js"></script>
-    <script src="vista/malla_curricular.js"></script>
-    <script src="vista/planificacion_academica.js"></script>
-      <script src="vista/planificacion_curso.js"></script>
-      <script src="vista/planificacion_horario.js"></script>
-      <script src="vista/planificacion_examen.js"></script>
-    <script src="vista/asignaturas.js"></script>
-    <script src="vista/aulas.js"></script>
-    <script src="vista/docentes.js"></script>
-    <script src="vista/grados.js"></script>
-    <script src="vista/institucion.js"></script>
-    <script src="vista/secciones.js"></script>
-    <script src="vista/sedes.js"></script>
-    <script src="vista/tipos_plan.js"></script>
-    <script src="vista/turnos.js"></script>
-    <script src="vista/requisitos.js"></script>
-    <script src="vista/requisito_inscripcion.js"></script>
+  
 
     <!-- Place this tag in your head or just before your close body tag. -->
     <script async defer src="https://buttons.github.io/buttons.js"></script>
