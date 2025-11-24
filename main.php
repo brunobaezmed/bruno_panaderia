@@ -279,7 +279,7 @@
           <div class="content-wrapper">
             <!-- Content -->
 
-            <div class="container-xxl flex-grow-1 container-p-y" id="contenido-principal">
+            <div class="container-xxl flex-grow-1 container-p-y contenido-principal" id="contenido-principal">
               
             </div>
             <!-- / Content -->
