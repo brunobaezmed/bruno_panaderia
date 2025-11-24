@@ -1,3 +1,4 @@
+<?php if (session_status() !== PHP_SESSION_ACTIVE) { session_start(); } ?>
 <!DOCTYPE html>
 
 <!-- =========================================================
@@ -160,6 +161,12 @@
               <a href="#" onclick="mostrarListaDeposito(); return false;" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-archive"></i>
                 <div data-i18n="">Depósito</div>
+              </a>
+            </li>
+            <li class="menu-item">
+              <a href="#" onclick="mostrarListaClientes(); return false;" class="menu-link">
+                <i class="menu-icon tf-icons bx bx-users"></i>
+                <div data-i18n="">Clientes</div>
               </a>
             </li>
 
@@ -346,9 +353,17 @@
 
     <script src="vista/util.js"></script>
   <script src="vista/deposito.js"></script>
+  <script src="vista/clientes.js"></script>
   
 
     <!-- Place this tag in your head or just before your close body tag. -->
     <script async defer src="https://buttons.github.io/buttons.js"></script>
+    <?php
+    // Si otra página solicitó mostrar depósitos, inyectamos un script para abrir la vista
+    if (isset($_SESSION['show_deposito']) && $_SESSION['show_deposito']) {
+        echo "<script>document.addEventListener('DOMContentLoaded', function(){ if(typeof mostrarListaDeposito === 'function') mostrarListaDeposito(); });</script>";
+        unset($_SESSION['show_deposito']);
+    }
+    ?>
   </body>
 </html>

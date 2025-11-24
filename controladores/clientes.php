@@ -32,9 +32,9 @@ if (isset($_POST['leer_activos'])) {
 function listar() {
     $base_datos = new DB();
     $query = $base_datos->conectar()->prepare(
-        "SELECT id_deposito, nombre_deposito, ubicacion, estado
-           FROM depositos
-       ORDER BY id_deposito DESC;"
+        "SELECT id_cliente, nombre_cliente, telefono, direccion, email, estado
+           FROM clientes
+       ORDER BY id_cliente DESC;"
     );
     $query->execute();
     if ($query->rowCount()) {
@@ -48,12 +48,14 @@ function guardar($lista) {
     $json_datos = json_decode($lista, true);
     $base_datos = new DB();
     $query = $base_datos->conectar()->prepare(
-        "INSERT INTO depositos (nombre_deposito, ubicacion, estado)
-         VALUES (:nombre_deposito, :ubicacion, :estado);"
+        "INSERT INTO clientes (nombre_cliente, telefono, direccion, email, estado)
+         VALUES (:nombre_cliente, :telefono, :direccion, :email, :estado);"
     );
     $params = [
-        'nombre_deposito' => $json_datos['nombre_deposito'],
-        'ubicacion' => !empty($json_datos['ubicacion']) ? $json_datos['ubicacion'] : null,
+        'nombre_cliente' => $json_datos['nombre_cliente'],
+        'telefono' => !empty($json_datos['telefono']) ? $json_datos['telefono'] : null,
+        'direccion' => !empty($json_datos['direccion']) ? $json_datos['direccion'] : null,
+        'email' => !empty($json_datos['email']) ? $json_datos['email'] : null,
         'estado' => $json_datos['estado'],
     ];
     $query->execute($params);
@@ -63,16 +65,20 @@ function actualizar($lista) {
     $json_datos = json_decode($lista, true);
     $base_datos = new DB();
     $query = $base_datos->conectar()->prepare(
-        "UPDATE depositos
-            SET nombre_deposito = :nombre_deposito,
-                ubicacion = :ubicacion,
+        "UPDATE clientes
+            SET nombre_cliente = :nombre_cliente,
+                telefono = :telefono,
+                direccion = :direccion,
+                email = :email,
                 estado = :estado
-          WHERE id_deposito = :id_deposito;"
+          WHERE id_cliente = :id_cliente;"
     );
     $params = [
-        'id_deposito' => $json_datos['id_deposito'],
-        'nombre_deposito' => $json_datos['nombre_deposito'],
-        'ubicacion' => !empty($json_datos['ubicacion']) ? $json_datos['ubicacion'] : null,
+        'id_cliente' => $json_datos['id_cliente'],
+        'nombre_cliente' => $json_datos['nombre_cliente'],
+        'telefono' => !empty($json_datos['telefono']) ? $json_datos['telefono'] : null,
+        'direccion' => !empty($json_datos['direccion']) ? $json_datos['direccion'] : null,
+        'email' => !empty($json_datos['email']) ? $json_datos['email'] : null,
         'estado' => $json_datos['estado'],
     ];
     $query->execute($params);
@@ -81,9 +87,9 @@ function actualizar($lista) {
 function obtener_por_id($id) {
     $base_datos = new DB();
     $query = $base_datos->conectar()->prepare(
-        "SELECT id_deposito, nombre_deposito, ubicacion, estado
-           FROM depositos
-          WHERE id_deposito = :id
+        "SELECT id_cliente, nombre_cliente, telefono, direccion, email, estado
+           FROM clientes
+          WHERE id_cliente = :id
           LIMIT 1;"
     );
     $query->execute(['id' => $id]);
@@ -97,7 +103,7 @@ function obtener_por_id($id) {
 function eliminar($id) {
     $base_datos = new DB();
     $query = $base_datos->conectar()->prepare(
-        "UPDATE depositos SET estado = 'INACTIVO' WHERE id_deposito = :id;"
+        "UPDATE clientes SET estado = 'INACTIVO' WHERE id_cliente = :id;"
     );
     $query->execute(['id' => $id]);
 }
@@ -105,10 +111,10 @@ function eliminar($id) {
 function buscar($texto) {
     $base_datos = new DB();
     $query = $base_datos->conectar()->prepare(
-        "SELECT id_deposito, nombre_deposito, ubicacion, estado
-           FROM depositos
-          WHERE CONCAT(nombre_deposito, ' ', COALESCE(ubicacion, ''), ' ', COALESCE(estado, ''), ' ', id_deposito) LIKE :texto
-       ORDER BY id_deposito DESC
+        "SELECT id_cliente, nombre_cliente, telefono, direccion, email, estado
+           FROM clientes
+          WHERE CONCAT(nombre_cliente, ' ', COALESCE(telefono, ''), ' ', COALESCE(direccion, ''), ' ', COALESCE(email, ''), ' ', COALESCE(estado, ''), ' ', id_cliente) LIKE :texto
+       ORDER BY id_cliente DESC
           LIMIT 50;"
     );
     $query->execute(['texto' => "%$texto%"]);
@@ -122,10 +128,10 @@ function buscar($texto) {
 function leer_activos() {
     $base_datos = new DB();
     $query = $base_datos->conectar()->prepare(
-        "SELECT id_deposito, nombre_deposito
-           FROM depositos
+        "SELECT id_cliente, nombre_cliente
+           FROM clientes
           WHERE estado = 'ACTIVO'
-       ORDER BY nombre_deposito;"
+       ORDER BY nombre_cliente;"
     );
     $query->execute();
     if ($query->rowCount()) {
