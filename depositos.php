@@ -1,6 +1,6 @@
 <?php
-// Parcial que renderiza la tabla de depósitos (se puede obtener por AJAX con dameContenido)
-require_once __DIR__ . '/../../../conexion/db.php';
+// Página independiente para listar depósitos (renderizado por servidor)
+require_once __DIR__ . '/conexion/db.php';
 $depositos = [];
 $errorDep = null;
 try {
@@ -16,7 +16,7 @@ try {
 <div class="container-fluid card" style="padding: 30px;">
     <div class="row">
         <div class="col-md-8">
-            <h3>Lista de Depósitos</h3>
+            <h3>Lista de Depósitos (Página independiente)</h3>
         </div>
         <div class="col-md-4 text-end">
             <button class="btn btn-primary" onclick="mostrarAgregarDeposito(); return false;"><i class="fa fa-plus"></i> Agregar</button>

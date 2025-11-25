@@ -157,6 +157,13 @@
             <li class="menu-header small text-uppercase">
               <span class="menu-header-text">Referenciales</span>
             </li>
+            
+            <li class="menu-item">
+              <a href="#" onclick="mostrarListaClientes(); return false;" class="menu-link">
+                <i class="menu-icon tf-icons bx bx-users"></i>
+                <div data-i18n="">Clientes</div>
+              </a>
+            </li>
             <li class="menu-item">
               <a href="#" onclick="mostrarListaDeposito(); return false;" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-archive"></i>
@@ -164,9 +171,15 @@
               </a>
             </li>
             <li class="menu-item">
-              <a href="#" onclick="mostrarListaClientes(); return false;" class="menu-link">
-                <i class="menu-icon tf-icons bx bx-users"></i>
-                <div data-i18n="">Clientes</div>
+              <a href="#" onclick="mostrarListaProveedores(); return false;" class="menu-link">
+                <i class="menu-icon tf-icons bx bx-building"></i>
+                <div data-i18n="">Proveedores</div>
+              </a>
+            </li>
+            <li class="menu-item">
+              <a href="#" onclick="mostrarListaProductos(); return false;" class="menu-link">
+                <i class="menu-icon tf-icons bx bx-box"></i>
+                <div data-i18n="">Productos</div>
               </a>
             </li>
 
@@ -352,18 +365,16 @@
 
 
     <script src="vista/util.js"></script>
+    <script src="vista/clientes.js"></script>
+  <script src="vista/proveedores.js"></script>
+  <script src="vista/productos.js"></script>
   <script src="vista/deposito.js"></script>
-  <script src="vista/clientes.js"></script>
   
 
     <!-- Place this tag in your head or just before your close body tag. -->
     <script async defer src="https://buttons.github.io/buttons.js"></script>
-    <?php
-    // Si otra página solicitó mostrar depósitos, inyectamos un script para abrir la vista
-    if (isset($_SESSION['show_deposito']) && $_SESSION['show_deposito']) {
-        echo "<script>document.addEventListener('DOMContentLoaded', function(){ if(typeof mostrarListaDeposito === 'function') mostrarListaDeposito(); });</script>";
-        unset($_SESSION['show_deposito']);
-    }
-    ?>
+  <?php
+  // (depositos) eliminado: ya no se inyecta script para abrir depósitos por sesión
+  ?>
   </body>
 </html>
