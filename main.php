@@ -164,12 +164,7 @@
                 <div data-i18n="">Clientes</div>
               </a>
             </li>
-            <li class="menu-item">
-              <a href="#" onclick="mostrarListaDeposito(); return false;" class="menu-link">
-                <i class="menu-icon tf-icons bx bx-archive"></i>
-                <div data-i18n="">Depósito</div>
-              </a>
-            </li>
+            <!-- Depósito eliminado del menú -->
             <li class="menu-item">
               <a href="#" onclick="mostrarListaProveedores(); return false;" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-building"></i>
@@ -367,8 +362,7 @@
     <script src="vista/util.js"></script>
     <script src="vista/clientes.js"></script>
   <script src="vista/proveedores.js"></script>
-  <script src="vista/productos.js"></script>
-  <script src="vista/deposito.js"></script>
+    <script src="vista/productos.js"></script>
   
 
     <!-- Place this tag in your head or just before your close body tag. -->
