@@ -147,7 +147,7 @@
                 </div>
               <?php endif; ?>
 
-              <form id="" class="mb-3" method="POST">
+              <form id="" class="mb-3" method="POST" action="index.php">
                 <div class="mb-3">
                   <label for="usario" class="form-label">Usuario</label>
                   <input

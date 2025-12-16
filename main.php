@@ -183,6 +183,44 @@
               </a>
             </li>
 
+            <li class="menu-header small text-uppercase">
+              <span class="menu-header-text">Inventario</span>
+            </li>
+
+            <li class="menu-item">
+              <a href="javascript:void(0);" class="menu-link menu-toggle">
+                <i class="menu-icon tf-icons bx bx-package"></i>
+                <div data-i18n="">Inventario</div>
+              </a>
+              <ul class="menu-sub">
+                <li class="menu-item">
+                  <a href="#" onclick="mostrarIngresosCompra(); return false;" class="menu-link">
+                    <div data-i18n="">Ingresos por Compra</div>
+                  </a>
+                </li>
+                <li class="menu-item">
+                  <a href="#" onclick="mostrarEgresosVenta(); return false;" class="menu-link">
+                    <div data-i18n="">Egresos por Venta</div>
+                  </a>
+                </li>
+                <li class="menu-item">
+                  <a href="#" onclick="mostrarTransferenciasDepositos(); return false;" class="menu-link">
+                    <div data-i18n="">Transferencias entre Depósitos</div>
+                  </a>
+                </li>
+                <li class="menu-item">
+                  <a href="#" onclick="mostrarAjusteStock(); return false;" class="menu-link">
+                    <div data-i18n="">Ajuste de Stock</div>
+                  </a>
+                </li>
+                <li class="menu-item">
+                  <a href="#" onclick="mostrarLibroMovimientos(); return false;" class="menu-link">
+                    <div data-i18n="">Libro de Movimientos</div>
+                  </a>
+                </li>
+              </ul>
+            </li>
+
           </ul>
         </aside>
         <!-- / Menu -->
@@ -369,7 +407,11 @@
     <script src="vista/deposito.js"></script>
     <script src="vista/proveedores.js"></script>
     <script src="vista/productos.js"></script>
-  
+    <script src="vista/ingresos_compras.js"></script>
+    <script src="vista/egresos_ventas.js"></script>
+    <script src="vista/transferencias_depositos.js"></script>
+    <script src="vista/ajuste_stock.js"></script>
+    <script src="vista/libro_movimientos.js"></script>
 
     <!-- Place this tag in your head or just before your close body tag. -->
     <script async defer src="https://buttons.github.io/buttons.js"></script>

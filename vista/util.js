@@ -130,7 +130,16 @@ function dameFechaActual(id_componente) {
     } else {
         actual += dia;
     }
-    $("#" + id_componente).val(actual);
+
+    // Compatibilidad: aceptar id con o sin '#'.
+    // Si no se recibe parametro, devolver la fecha como string.
+    if (typeof id_componente === 'undefined' || id_componente === null || id_componente === '') {
+        return actual;
+    }
+
+    var selector = id_componente.charAt(0) === '#' ? id_componente : ('#' + id_componente);
+    $(selector).val(actual);
+    return actual;
 }
 
 function dameFechaActualFormateada() {
